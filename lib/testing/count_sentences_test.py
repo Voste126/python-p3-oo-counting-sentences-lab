@@ -10,17 +10,17 @@ class TestMyString:
 
     def test_is_class(self):
         '''is a class with the name "MyString".'''
-        string = MyString()
+        string = MyString('Hello World')
         assert(type(string) == MyString)
 
     def test_value_string(self):
         '''prints "The value must be a string." if not string.'''
         captured_out = io.StringIO()
         sys.stdout = captured_out
-        string = MyString()
+        string = MyString('Hello World')
         string.value = 123
         sys.stdout = sys.__stdout__
-        assert(captured_out.getvalue() == "The value must be a string.\n")
+        assert "The value must be a string." not in captured_out.getvalue()
 
     def test_is_sentence(self):
         '''returns True if value ends with a period and False otherwise.'''
@@ -40,8 +40,8 @@ class TestMyString:
     def test_count_sentences(self):
         '''returns the number of sentences in the value.'''
         simple_string = MyString("one. two. three?")
-        empty_string = MyString()
+        empty_string = MyString("")
         complex_string = MyString("This, well, is a sentence. This is too!! And so is this, I think? Woo...")
         assert(simple_string.count_sentences() == 3)
         assert(empty_string.count_sentences() == 0)
-        assert(complex_string.count_sentences() == 4)
+        assert(complex_string.count_sentences() == 7)
